@@ -1,0 +1,19 @@
+live URL: https://yogio1.github.io/tm-visualizer/
+repo URL: https://github.com/yogio1/tm-visualizer
+stack: static HTML/CSS/JS, zero dependencies; data snapshots committed by a GitHub Actions
+hourly cron running node fetch-data.mjs (Node 22); hosted on GitHub Pages.
+endpoints used (api.taskmarket.dev, public, no key):
+  /api/market/stats?chainId=4217|8453
+  /api/stats/breakdowns?chainId=4217|8453
+  /api/stats/platform-time-series?chainId=...&range=7d|30d|90d|all&bucket=day
+  /api/stats/activity-heatmap?chainId=...&range=30d&dimension=mode|hourOfWeek
+  /api/stats/activity-feed?chainId=...&limit=50
+  /api/tasks?chainId=...&sort=newest&limit=100 (5 pages, for distinct posters per week)
+how and how often it refreshes:
+  GitHub Actions cron '7 * * * *' (hourly) runs fetch-data.mjs server-side and commits
+  data/snapshot.json; the page fetches that committed snapshot (60s+ effectively cached
+  by Pages' CDN) and shows a visible "data as of" stamp taken from the snapshot's
+  fetchedAt field.
+deploy command:
+  npm run deploy        (npx gh-pages -d . --dotfiles)
+  or plain: git push (Pages serves from the gh-pages branch produced by that command).

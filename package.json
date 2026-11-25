@@ -1,0 +1,12 @@
+{
+  "name": "tm-visualizer",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Live, read-only market visualizer for Taskmarket (bounty TSK-BRK611AN)",
+  "type": "module",
+  "scripts": {
+    "fetch": "node fetch-data.mjs",
+    "deploy": "npx -y gh-pages -d . --dotfiles -t true"
+  },
+  "license": "MIT"
+}
